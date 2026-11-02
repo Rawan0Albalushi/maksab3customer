@@ -14,6 +14,7 @@ import 'package:sixam_mart/helper/module_helper.dart';
 import 'package:sixam_mart/helper/price_converter.dart';
 import 'package:sixam_mart/helper/responsive_helper.dart';
 import 'package:sixam_mart/helper/route_helper.dart';
+import 'package:sixam_mart/helper/web_origin_helper.dart';
 import 'package:sixam_mart/util/app_constants.dart';
 import 'package:sixam_mart/util/dimensions.dart';
 import 'package:flutter/foundation.dart';
@@ -119,10 +120,8 @@ class ProController extends GetxController implements GetxService {
 
     _isSubscribeLoading = true;
     update();
-    String? hostname = html.window.location.hostname;
-    String protocol = html.window.location.protocol;
     String paymentPlatform = GetPlatform.isWeb ? 'web' : 'app';
-    String? callback = kIsWeb ? '$protocol//$hostname${RouteHelper.subscriptionPlan}${isRenew ? '/renew' : ''}' : null;
+    String? callback = kIsWeb ? '${webOrigin()}${RouteHelper.subscriptionPlan}${isRenew ? '/renew' : ''}' : null;
     Response response = await proServiceInterface.subscribePlan(planId: plan.id!, paymentType: paymentType, paymentMethod: paymentMethod, callback: callback, paymentPlatform: paymentPlatform);
     _isSubscribeLoading = false;
     update();

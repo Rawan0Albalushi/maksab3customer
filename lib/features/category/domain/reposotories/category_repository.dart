@@ -42,7 +42,7 @@ class CategoryRepository implements CategoryRepositoryInterface {
 
     Map<String, String>? cacheHeader = header ?? apiClient.getHeader();
 
-    String cacheId = '${AppConstants.categoryUri} ${Get.find<SplashController>().module?.id??''}';
+    String cacheId = '${AppConstants.categoryUri} ${Get.find<SplashController>().module?.id??''} img2';
 
     switch(source) {
       case DataSourceEnum.client:

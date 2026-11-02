@@ -46,6 +46,7 @@ import 'package:sixam_mart/helper/file_validation_helper.dart';
 import 'package:sixam_mart/helper/price_converter.dart';
 import 'package:sixam_mart/helper/responsive_helper.dart';
 import 'package:sixam_mart/helper/route_helper.dart';
+import 'package:sixam_mart/helper/web_origin_helper.dart';
 import 'package:sixam_mart/util/app_constants.dart';
 import 'package:sixam_mart/common/widgets/custom_snackbar.dart';
 import 'package:universal_html/html.dart' as html;
@@ -1470,11 +1471,9 @@ class CheckoutController extends GetxController implements GetxService {
         if(GetPlatform.isWeb) {
           // Get.back();
           await Get.find<AuthController>().saveGuestNumber(contactNumber ?? '');
-          String? hostname = html.window.location.hostname;
-          String protocol = html.window.location.protocol;
-          String selectedUrl;
-          selectedUrl = '${AppConstants.baseUrl}/payment-mobile?order_id=$orderID&&customer_id=${Get.find<ProfileController>().userInfoModel?.id ?? (userID.isNotEmpty ? userID : AuthHelper.getGuestId())}'
-              '&payment_method=$digitalPaymentName&payment_platform=web&&callback=$protocol//$hostname${RouteHelper.orderSuccess}?id=$orderID&status=';
+          final String callback = webPaymentCallback('${RouteHelper.orderSuccess}?id=$orderID&status=');
+          final String selectedUrl = '${AppConstants.baseUrl}/payment-mobile?order_id=$orderID&customer_id=${Get.find<ProfileController>().userInfoModel?.id ?? (userID.isNotEmpty ? userID : AuthHelper.getGuestId())}'
+              '&payment_method=$digitalPaymentName&payment_platform=web&callback=$callback';
 
           html.window.open(selectedUrl,"_self");
         } else{
@@ -1549,11 +1548,9 @@ class CheckoutController extends GetxController implements GetxService {
     } else if(paymentMethodIndex == 2) {
       _closePaymentSheet();
       if(GetPlatform.isWeb) {
-        String? hostname = html.window.location.hostname;
-        String protocol = html.window.location.protocol;
-        String selectedUrl;
-        selectedUrl = '${AppConstants.baseUrl}/payment-mobile?order_id=${paymentData.orderID}&&customer_id=${paymentData.userId ?? AuthHelper.getGuestId()}'
-            '&payment_method=$digitalPaymentName&payment_platform=web&&callback=$protocol//$hostname${RouteHelper.orderSuccess}?id=${paymentData.orderID}&status=';
+        final String callback = webPaymentCallback('${RouteHelper.orderSuccess}?id=${paymentData.orderID}&status=');
+        final String selectedUrl = '${AppConstants.baseUrl}/payment-mobile?order_id=${paymentData.orderID}&customer_id=${paymentData.userId ?? AuthHelper.getGuestId()}'
+            '&payment_method=$digitalPaymentName&payment_platform=web&callback=$callback';
 
         html.window.open(selectedUrl,"_self");
       } else{

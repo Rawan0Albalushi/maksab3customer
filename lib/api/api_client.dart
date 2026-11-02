@@ -98,6 +98,36 @@ class ApiClient extends GetxService {
 
   Map<String, String> getHeader() => _mainHeaders;
 
+  /// True when [requestModuleId] still refers to the module in the live header.
+  ///
+  /// The deep-link route used to put the module slug in the header and the address
+  /// save then replaced it with the numeric id. Both name the module the user is
+  /// on, but a raw string compare treated that rewrite as a switch and threw away
+  /// the category and banner responses, leaving their sections on the shimmer.
+  bool _moduleSelectionUnchanged(String? requestModuleId) {
+    final String? current = _mainHeaders[AppConstants.moduleId];
+    if (requestModuleId == current) {
+      return true;
+    }
+    if (requestModuleId == null || current == null) {
+      return false;
+    }
+    final String? stored = sharedPreferences.getString(AppConstants.moduleId);
+    if (stored == null || stored.isEmpty) {
+      return false;
+    }
+    try {
+      final ModuleModel module = ModuleModel.fromJson(jsonDecode(stored));
+      final String id = module.id?.toString() ?? '';
+      final String slug = module.slug ?? '';
+      final bool requestIsStored = requestModuleId == id || (slug.isNotEmpty && requestModuleId == slug);
+      final bool currentIsStored = current == id || (slug.isNotEmpty && current == slug);
+      return requestIsStored && currentIsStored;
+    } catch (_) {
+      return false;
+    }
+  }
+
   Future<Response> getData(String uri, {Map<String, dynamic>? query, Map<String, String>? headers, bool handleError = true, bool moduleScoped = false,
     bool rawBody = false}) async {
     try {
@@ -110,8 +140,9 @@ class ApiClient extends GetxService {
       }
       http.Response response = await http.get(Uri.parse(appBaseUrl + uri), headers: requestHeaders).timeout(Duration(seconds: timeoutInSeconds));
       // Module switched while this was in flight — drop it so it can't overwrite the
-      // shared controllers bound to the now-active module's screen.
-      if (moduleScoped && requestModuleId != _mainHeaders[AppConstants.moduleId]) {
+      // shared controllers bound to the now-active module's screen. A slug and the
+      // numeric id of the module that is still selected are the same selection.
+      if (moduleScoped && !_moduleSelectionUnchanged(requestModuleId)) {
         return const Response(statusCode: 499, statusText: 'stale module response');
       }
       return handleResponse(response, uri, handleError, rawBody: rawBody);

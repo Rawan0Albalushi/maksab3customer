@@ -1354,9 +1354,12 @@ class RouteHelper {
             print('-------found module: ${foundModule?.slug ?? foundModule?.id} // can route : $canContinue');
             if(foundModule != null) {
               Get.find<SplashController>().setModule(foundModule);
+              // Numeric id, not the slug. Saving the address rewrites this header
+              // with the id, and a slug here makes the in-flight home responses
+              // look like a module switch and get dropped.
               apiClient.updateHeader(
                 sharedPreferences.getString(AppConstants.token), null, null,
-                sharedPreferences.getString(AppConstants.languageCode), moduleSlug, '0', '0', null
+                sharedPreferences.getString(AppConstants.languageCode), foundModule.id?.toString(), '0', '0', null
               );
             } else {
               apiClient.updateHeader(
@@ -1407,9 +1410,12 @@ Future<void> _moduleCheck(String moduleSlug, ApiClient apiClient, SharedPreferen
       print('-------found module: ${foundModule?.slug ?? foundModule?.id} // route module slug: $moduleSlug');
       if(foundModule != null) {
         Get.find<SplashController>().setModule(foundModule);
+        // Same id setModule just wrote. Passing the slug made the next address
+        // save look like a module switch, so categories and banners were dropped
+        // and the home skeletons never resolved.
         apiClient.updateHeader(
             sharedPreferences.getString(AppConstants.token), addressModel.zoneIds, addressModel.areaIds,
-            sharedPreferences.getString(AppConstants.languageCode), moduleSlug, addressModel.latitude, addressModel.longitude, null
+            sharedPreferences.getString(AppConstants.languageCode), foundModule.id?.toString(), addressModel.latitude, addressModel.longitude, null
         );
         Get.find<SplashController>().clearDataNull(foundModule);
 

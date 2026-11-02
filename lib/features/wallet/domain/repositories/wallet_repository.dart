@@ -6,8 +6,8 @@ import 'package:sixam_mart/api/response_parser.dart';
 import 'package:sixam_mart/features/wallet/domain/models/fund_bonus_model.dart';
 import 'package:sixam_mart/features/wallet/domain/repositories/wallet_repository_interface.dart';
 import 'package:sixam_mart/helper/route_helper.dart';
+import 'package:sixam_mart/helper/web_origin_helper.dart';
 import 'package:sixam_mart/util/app_constants.dart';
-import 'package:universal_html/html.dart' as html;
 
 class WalletRepository implements WalletRepositoryInterface{
   final ApiClient apiClient;
@@ -16,15 +16,12 @@ class WalletRepository implements WalletRepositoryInterface{
 
   @override
   Future<Response> addFundToWallet(double amount, String paymentMethod) async {
-    String? hostname = html.window.location.hostname;
-    String protocol = html.window.location.protocol;
-
     return await apiClient.postData(AppConstants.addFundUri,
       {
         "amount": amount,
         "payment_method": paymentMethod,
         "payment_platform": GetPlatform.isWeb ? 'web' : '',
-        "callback": '$protocol//$hostname${RouteHelper.wallet}',
+        "callback": '${webOrigin()}${RouteHelper.wallet}',
       }
     );
   }

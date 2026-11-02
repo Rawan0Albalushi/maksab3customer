@@ -1,34 +1,41 @@
 {
   "project_info": {
-    "project_number": "491987943015",
-    "project_id": "stackmart-500c7",
-    "storage_bucket": "stackmart-500c7.appspot.com"
+    "project_number": "1091888758486",
+    "project_id": "maksab-production-c93fb",
+    "storage_bucket": "maksab-production-c93fb.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:491987943015:android:a6fb4303cc4bf3d18f1ec2",
+        "mobilesdk_app_id": "1:1091888758486:android:ee250897ef778f145b9377",
         "android_client_info": {
-          "package_name": "com.sixamtech.sixam_mart_user"
+          "package_name": "om.thawani.deliveryman"
         }
       },
       "oauth_client": [
         {
-          "client_id": "491987943015-agln6biv84krpnngdphj87jkko7r9lb8.apps.googleusercontent.com",
+          "client_id": "1091888758486-8tm44jq4msj4jcb0m26jt0lldsn12tac.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCc3OCd5I2xSlnftZ4bFAbuCzMhgQHLivA"
+          "current_key": "AIzaSyBMEqWRV6IufIK8vGwa92gd7Ml9BQnbhPQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "491987943015-agln6biv84krpnngdphj87jkko7r9lb8.apps.googleusercontent.com",
+              "client_id": "1091888758486-8tm44jq4msj4jcb0m26jt0lldsn12tac.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1091888758486-cmrkhm8256h457gbr07t3d8k4375pj5g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "om.thawani.stroe"
+              }
             }
           ]
         }
@@ -36,28 +43,95 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:491987943015:android:de46aa9776b1b4888f1ec2",
+        "mobilesdk_app_id": "1:1091888758486:android:a7eb0c31d166d04b5b9377",
         "android_client_info": {
-          "package_name": "com.sixamtech.stack_food_user"
+          "package_name": "om.thawani.stroe"
         }
       },
       "oauth_client": [
         {
-          "client_id": "491987943015-agln6biv84krpnngdphj87jkko7r9lb8.apps.googleusercontent.com",
+          "client_id": "1091888758486-8tm44jq4msj4jcb0m26jt0lldsn12tac.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCc3OCd5I2xSlnftZ4bFAbuCzMhgQHLivA"
+          "current_key": "AIzaSyBMEqWRV6IufIK8vGwa92gd7Ml9BQnbhPQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "491987943015-agln6biv84krpnngdphj87jkko7r9lb8.apps.googleusercontent.com",
+              "client_id": "1091888758486-8tm44jq4msj4jcb0m26jt0lldsn12tac.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1091888758486-cmrkhm8256h457gbr07t3d8k4375pj5g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "om.thawani.stroe"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1091888758486:android:9284cba638c5a8c35b9377",
+        "android_client_info": {
+          "package_name": "om.thawani.user"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1091888758486-em4s1e1qccf4are0npntc8o6jlq2v469.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "om.thawani.user",
+            "certificate_hash": "ce62238e3d531aaaa54fd54f34c1721d9d20193e"
+          }
+        },
+        {
+          "client_id": "1091888758486-s6fqtjlc5mv0gpdi71ljv5sapnv2o8nc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "om.thawani.user",
+            "certificate_hash": "e05acd4934476dd6b17fde918a0fd846214ffa3d"
+          }
+        },
+        {
+          "client_id": "1091888758486-vr68a19lm6dmkgibp1og8uu3jmdjqgjj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "om.thawani.user",
+            "certificate_hash": "cb47428bb21b8c39d2351b82c151841c97209765"
+          }
+        },
+        {
+          "client_id": "1091888758486-8tm44jq4msj4jcb0m26jt0lldsn12tac.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMEqWRV6IufIK8vGwa92gd7Ml9BQnbhPQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1091888758486-8tm44jq4msj4jcb0m26jt0lldsn12tac.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1091888758486-cmrkhm8256h457gbr07t3d8k4375pj5g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "om.thawani.stroe"
+              }
             }
           ]
         }

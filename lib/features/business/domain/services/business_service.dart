@@ -9,6 +9,7 @@ import 'package:sixam_mart/features/home/controllers/home_controller.dart';
 import 'package:sixam_mart/helper/auth_helper.dart';
 import 'package:sixam_mart/helper/responsive_helper.dart';
 import 'package:sixam_mart/helper/route_helper.dart';
+import 'package:sixam_mart/helper/web_origin_helper.dart';
 import 'business_service_interface.dart';
 import 'package:universal_html/html.dart' as html;
 
@@ -35,9 +36,6 @@ class BusinessService implements BusinessServiceInterface{
     String businessPlan = 'subscription';
     int? packageId = selectedPackageId;
     String? payment = paymentIndex == 0 ? 'free_trial' : digitalPaymentName;
-    String? hostname = html.window.location.hostname;
-    String protocol = html.window.location.protocol;
-
     if(paymentIndex == 1 && digitalPaymentName == null) {
       if(ResponsiveHelper.isDesktop(Get.context)) {
         Get.dialog(const Dialog(backgroundColor: Colors.transparent, child: BusinessPaymentMethodBottomSheetWidget()));
@@ -52,7 +50,7 @@ class BusinessService implements BusinessServiceInterface{
           storeId: storeId.toString(),
           payment: payment,
           paymentGateway: payment,
-          callBack: paymentIndex == 0 ? '' : ResponsiveHelper.isDesktop(Get.context) ? '$protocol//$hostname${RouteHelper.subscriptionSuccess}' : RouteHelper.subscriptionSuccess,
+          callBack: paymentIndex == 0 ? '' : ResponsiveHelper.isDesktop(Get.context) ? '${webOrigin()}${RouteHelper.subscriptionSuccess}' : RouteHelper.subscriptionSuccess,
           paymentPlatform: GetPlatform.isWeb ? 'web' : 'app',
           type: 'new_join',
         ),
